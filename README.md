@@ -33,20 +33,22 @@ mvn test
 
 ## API Documentation
 
-Register a Member
+### Register a Member
 
-URL: /api/members
+**URL:** `/api/members`
 
-Method: POST
+**Method:** `POST`
 
-Request Body:
-```{
-"name": "Jane Doe",
-"email": "jane@mailinator.com",
-"phoneNumber": "2125551234"
+**Request Body:**
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@mailinator.com",
+  "phoneNumber": "2125551234"
 }
 ```
 
-Response:
+**Response:**
 
-```Status: 200 OK if the registration is successful```
+```json
+{ "status": "200 OK" }
