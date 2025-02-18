@@ -1,17 +1,17 @@
 package org.spring.as.quickstarts.kitchensink.model;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import jakarta.validation.constraints.*;
 
 import java.io.Serializable;
 
-@Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Document(collection = "members")  // Collection name in MongoDB
 public class Member implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;  // MongoDB uses String IDs by default
 
     @NotNull
     @Size(min = 1, max = 25)
@@ -26,7 +26,6 @@ public class Member implements Serializable {
     @NotNull
     @Size(min = 10, max = 12)
     @Digits(fraction = 0, integer = 12)
-    @Column(name = "phone_number")
     private String phoneNumber;
 
     // Getters and Setters
