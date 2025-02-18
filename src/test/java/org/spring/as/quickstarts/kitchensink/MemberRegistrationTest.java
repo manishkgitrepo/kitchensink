@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MemberRegistrationIT {
+public class MemberRegistrationTest {
 
     @Autowired
     private MockMvc mockMvc;

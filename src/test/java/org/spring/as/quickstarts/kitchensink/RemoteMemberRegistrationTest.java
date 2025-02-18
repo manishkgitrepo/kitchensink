@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RemoteMemberRegistrationIT {
+public class RemoteMemberRegistrationTest {
 
     @Value("http://localhost:${local.server.port}/api/members")
     private String baseUrl;
