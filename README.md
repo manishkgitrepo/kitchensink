@@ -6,6 +6,7 @@ This is a Spring Boot application for managing member registrations.
 
 - Java 11 or higher
 - Maven 3.6.0 or higher
+- MongoDB running on `localhost:27017`
 
 ## Building the Application
 
