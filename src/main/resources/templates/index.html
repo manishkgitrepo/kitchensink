@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Member Registration</title>
+    <style>
+        .invalid {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div th:fragment="content">
+    <h1>Member Registration</h1>
+    <p>Enforces annotation-based constraints defined on the model class.</p>
+
+    <!-- Display success or error messages -->
+    <div th:if="${message}" style="color: green;">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${error}" style="color: red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <!-- Registration Form -->
+    <form th:action="@{/register}" th:object="${newMember}" method="post">
+        <table>
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" th:field="*{name}" /></td>
+                <td th:if="${#fields.hasErrors('name')}" class="invalid"
+                    th:errors="*{name}">Name Error</td>
+            </tr>
+            <tr>
+                <td><label for="email">Email:</label></td>
+                <td><input type="text" id="email" th:field="*{email}" /></td>
+                <td th:if="${#fields.hasErrors('email')}" class="invalid"
+                    th:errors="*{email}">Email Error</td>
+            </tr>
+            <tr>
+                <td><label for="phoneNumber">Phone #:</label></td>
+                <td><input type="text" id="phoneNumber" th:field="*{phoneNumber}" /></td>
+                <td th:if="${#fields.hasErrors('phoneNumber')}" class="invalid"
+                    th:errors="*{phoneNumber}">Phone Number Error</td>
+            </tr>
+        </table>
+        <button type="submit" class="register">Register</button>
+    </form>
+
+    <!-- Display List of Members -->
+    <h2>Members</h2>
+    <div th:if="${members != null and #lists.isEmpty(members)}">
+        <em>No registered members.</em>
+    </div>
+
+    <table class="simpletablestyle" th:if="${members != null and !#lists.isEmpty(members)}">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone #</th>
+            <th>REST URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.id}">Id</td>
+            <td th:text="${member.name}">Name</td>
+            <td th:text="${member.email}">Email</td>
+            <td th:text="${member.phoneNumber}">Phone Number</td>
+            <td>
+                <a th:href="@{/api/members/{id}(id=${member.id})}">
+                    /api/members/<span th:text="${member.id}">Id</span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="5">
+                REST URL for all members: <a th:href="@{/api/members}">/api/members</a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+</html>
